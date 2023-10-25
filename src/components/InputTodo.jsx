@@ -1,12 +1,16 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../redux/reducer/todoList-reducer";
 
 const InputTodo = () => {
+  const dispatch = useDispatch();
   const [input, setInput] = useState("");
 
   const handleAddTodo = (e) => {
-    e.prevent.default();
-    console.log(input);
+    e.preventDefault();
+    dispatch(addTodo(input));
+    setInput("");
   };
 
   return (
