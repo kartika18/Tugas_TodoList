@@ -50,4 +50,11 @@ export const deleteTodo = (id) => {
   };
 };
 
+export const editTodo = (input) => {
+  return {
+    type: "EDIT_TODO",
+    payload: input,
+  };
+};
+
 export default todoReducer;

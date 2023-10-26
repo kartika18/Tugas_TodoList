@@ -11,15 +11,25 @@ const ListTodo = () => {
   };
 
   return (
-    <div>
+    <>
       {todos.map((todo) => (
-        <div key={todo.id} style={{ display: "flex", marginTop: "24px" }}>
-          <p style={{ margin: "0", marginRight: "14px" }}>{todo.value}</p>
-          <button>Edit</button>
-          <button onClick={() => handleDelete(todo.id)}>X</button>
+        <div
+          key={todo.id}
+          className="font-alata flex justify-between items-center mx-5 mt-0 mb-3 px-12 py-3 bg-white rounded-xl "
+        >
+          <p>{todo.value}</p>
+          <div className="flex gap-5">
+            <button className="bg-yellow px-6 py-2 rounded-lg">Edit</button>
+            <button
+              onClick={() => handleDelete(todo.id)}
+              className="bg-redish px-6 py-2 rounded-lg"
+            >
+              Delete
+            </button>
+          </div>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 
