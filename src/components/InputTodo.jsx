@@ -9,8 +9,12 @@ const InputTodo = () => {
 
   const handleAddTodo = (e) => {
     e.preventDefault();
-    dispatch(addTodo(input));
-    setInput("");
+    if (input !== "") {
+      dispatch(addTodo(input));
+      setInput("");
+    } else {
+      alert("Harap Masukkan Todo");
+    }
   };
 
   return (
@@ -27,7 +31,7 @@ const InputTodo = () => {
           onClick={handleAddTodo}
           className="px-10 py-1 bg-brown text-white rounded-3xl"
         >
-          Add
+          Tambah
         </button>
       </form>
     </div>

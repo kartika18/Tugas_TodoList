@@ -3,10 +3,20 @@ const initialState = {
     {
       id: 1,
       value: "belajar react",
+      isEdit: false,
+      isCompleted: false,
     },
     {
       id: 2,
       value: "belajar redux",
+      isEdit: false,
+      isCompleted: false,
+    },
+    {
+      id: 3,
+      value: "makan",
+      isEdit: false,
+      isCompleted: false,
     },
   ],
 };
@@ -15,10 +25,10 @@ const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TODO":
       const newTodo = {
+        ...state,
         id: Date.now(),
         value: action.payload,
       };
-      console.log(newTodo.id);
       const addedTodos = [...state.todos, newTodo];
       return {
         todos: addedTodos,
@@ -29,6 +39,33 @@ const todoReducer = (state = initialState, action) => {
       );
       return {
         todos: deletedTodo,
+      };
+    case "EDIT_TODO":
+      const { id, input } = action.payload;
+      const editedTodo = state.todos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, value: input };
+        } else {
+          return todo;
+        }
+      });
+      return {
+        ...state,
+        todos: editedTodo,
+      };
+    case "COMPLETE_TODO":
+      const completedTodo = state.todos.map((todo) => {
+        if (todo.id === action.id) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+          };
+        }
+        return todo;
+      });
+      return {
+        ...state,
+        todos: completedTodo,
       };
 
     default:
@@ -50,10 +87,17 @@ export const deleteTodo = (id) => {
   };
 };
 
-export const editTodo = (input) => {
+export const editTodo = (id, input) => {
   return {
     type: "EDIT_TODO",
-    payload: input,
+    payload: { id, input },
+  };
+};
+
+export const completeTodo = (id) => {
+  return {
+    type: "COMPLETE_TODO",
+    payload: id,
   };
 };
 
