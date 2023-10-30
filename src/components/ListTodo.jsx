@@ -30,7 +30,7 @@ const ListTodo = () => {
   };
 
   return (
-    <>
+    <div className="m-4">
       {todos.map((todo) => (
         <div
           key={todo.id}
@@ -38,7 +38,7 @@ const ListTodo = () => {
         >
           {!isEdit ? (
             <>
-              <div>
+              <div className="flex gap-3">
                 <input
                   type="checkbox"
                   checked={todo.isCompleted}
@@ -88,7 +88,7 @@ const ListTodo = () => {
           )}
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
